@@ -1,0 +1,69 @@
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="nav navbar-text pull-left">
+                <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget">
+                    <span class="glyphicon glyphicon-chevron-left"></span></a>
+            </p>
+            <a class="navbar-brand">
+                Choose Widget
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid" id="widget-chooser">
+
+    <div class="row">
+        <a ng-click="model.addWidget('HEADER')"><h5>Header</h5></a>
+    </div>
+
+    <div class="row">
+        <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget"><h5>Label</h5></a>
+    </div>
+
+    <div class="row">
+        <a ng-click="model.addWidget('HTML')"><h5>HTML</h5></a>
+    </div>
+
+    <div class="row">
+        <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget"><h5>Text Input</h5></a>
+    </div>
+
+    <div class="row">
+        <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget"><h5>Link</h5></a>
+    </div>
+
+    <div class="row">
+        <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget"><h5>Button</h5></a>
+    </div>
+
+    <div class="row">
+        <a ng-click="model.addWidget('IMAGE')"><h5>Image</h5></a>
+    </div>
+
+    <div class="row">
+        <a ng-click="model.addWidget('YOUTUBE')"><h5>YouTube</h5></a>
+    </div>
+
+    <div class="row">
+        <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget"><h5>Data Table</h5></a>
+    </div>
+
+    <div class="row">
+        <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget"><h5>Repeater</h5></a>
+    </div>
+
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-footer">
+            <p class="nav navbar-text pull-right">
+                <a href="#/user/{{model.uid}}"><span class="glyphicon glyphicon-user"></span></a>
+            </p>
+        </div>
+    </div>
+</nav>
