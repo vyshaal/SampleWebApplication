@@ -17,8 +17,10 @@
 
         init();
         function init() {
-            vm.widgets = WidgetService.findWidgetsByPageId(vm.pid);
-            console.log(vm.widgets);
+            WidgetService.findWidgetsByPageId(vm.pid).then(function (response) {
+                vm.widgets = response.data;
+                jQuery(".container-fluid").sortable({axis:"y"});
+            });
         }
 
         function checkSafeHtml(html) {

@@ -14,30 +14,40 @@
         vm.updateWebsite = updateWebsite;
         init();
         function init() {
-            vm.website = WebsiteService.findWebsiteById(vm.wid);
-            vm.websites = WebsiteService.findWebsitesByUser(vm.uid);
+            WebsiteService.findWebsitesByUser(vm.uid)
+                .then(function (response) {
+                    vm.websites = response.data;
+                });
+            WebsiteService.findWebsiteById(vm.wid)
+                .then(function (response) {
+                    vm.website = response.data;
+                });
+            console.log(vm.website);
         }
 
         function deleteWebsite(websiteId) {
-            var flag = WebsiteService.deleteWebsite(websiteId);
-            if(flag){
-                vm.success = "Website deleted successfully";
-                $location.url('/user/'+vm.uid+'/website');
-            }
-            else
-                vm.error = "Failed to delete the website";
+            WebsiteService.deleteWebsite(websiteId)
+                .then(
+                    function (response) {
+                        vm.success = "Website deleted successfully";
+                        $location.url('/user/'+vm.uid+'/website');
+                    },
+                    function (response) {
+                        vm.error = "Failed to delete the website";
+                    });
         }
 
         function updateWebsite(websiteId,website) {
-            var temp = WebsiteService.updateWebsite(websiteId,website);
-            if(temp){
-                vm.websites = temp;
-                $location.url('/user/'+vm.uid+'/website')
-                vm.success = "Successfully updated the website";
-            }
-            else{
-                vm.error = "Failed to update the website";
-            }
+            WebsiteService.updateWebsite(websiteId,website)
+                .then(
+                    function (response) {
+                        vm.websites = response.data;
+                        $location.url('/user/'+vm.uid+'/website')
+                        vm.success = "Successfully updated the website";
+                    },
+                    function (response) {
+                        vm.error = "Failed to update the website";
+                    });
         }
 
 

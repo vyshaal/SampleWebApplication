@@ -16,32 +16,38 @@
 
         init();
         function init() {
-            vm.page = PageService.findPageById(vm.pid);
-            vm.pages = PageService.findPageByWebsiteId(vm.wid);
+            PageService.findPageById(vm.pid)
+                .then(function (response) {
+                    vm.page = response.data;
+                });
+            PageService.findPageByWebsiteId(vm.wid)
+                .then(function (response) {
+                    vm.pages = response.data;
+                });
         }
 
         function deletePage(pageId) {
-            var flag = PageService.deletePage(pageId);
-            if(flag){
-                vm.success = "Page deleted successfully";
-                $location.url('/user/'+vm.uid+'/website/'+vm.wid+'/page');
-            }
-            else
-                vm.error = "Failed to delete the page";
+            PageService.deletePage(pageId)
+                .then(
+                    function (response) {
+                        vm.success = "Page deleted successfully";
+                        $location.url('/user/'+vm.uid+'/website/'+vm.wid+'/page');
+                    },
+                    function (response) {
+                        vm.error = "Failed to delete the page";
+                    });
         }
 
         function updatePage(pageId,page) {
-            var temp = PageService.updatePage(pageId,page);
-            if(temp){
-                vm.websites = temp;
-                $location.url('/user/'+vm.uid+'/website/'+vm.wid+'/page');
-                vm.success = "Successfully updated the page";
-            }
-            else{
-                vm.error = "Failed to update the page";
-            }
+            PageService.updatePage(pageId,page)
+                .then(function (response) {
+                    $location.url('/user/'+vm.uid+'/website/'+vm.wid+'/page');
+                    vm.success = "Successfully updated the page";
+                },
+                function (response) {
+                    vm.error = "Failed to update the page";
+                });
         }
-
 
     }
 })();

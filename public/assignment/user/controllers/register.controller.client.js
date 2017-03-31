@@ -23,18 +23,26 @@
                 vm.error = "Passwords doesn't match";
                 return
             }
-            var u = UserService.findUserByUsername(user.username);
-            if (u)
-                vm.error = "Username is not available";
-            else {
-                u = UserService.createUser(user);
-                if(u){
-                    vm.success = "User successfully registered";
-                    $location.url("/user/"+u._id);
-                }
-                else
-                    vm.error = "Failed to Register!!! Please try again";
-            }
+
+            var promise = UserService.findUserByUsername(user.username);
+            promise.then(
+                function (response) {
+                    vm.error = "Username is not available";
+                },
+                function (response) {
+                    UserService.createUser(user)
+                        .then(
+                            function (res) {
+                                u = res.data;
+                                if(u._id){
+                                    vm.success = "User successfully registered";
+                                    $location.url("/user/"+u._id);
+                                }
+                                else
+                                    vm.error = "Failed to register";
+                            });
+                });
+
         }
     }
 

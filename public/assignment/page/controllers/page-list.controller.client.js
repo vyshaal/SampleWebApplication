@@ -13,8 +13,10 @@
 
         init();
         function init() {
-            vm.pages = PageService.findPageByWebsiteId(vm.wid);
-            //console.log(vm.pages);
+            PageService.findPageByWebsiteId(vm.wid)
+                .then(function (response) {
+                vm.pages = response.data;
+            });
         }
 
     }

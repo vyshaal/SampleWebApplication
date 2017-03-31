@@ -14,12 +14,18 @@
     </div>
 </nav>
 
-<div>
-    <form>
-        <div ng-include="'widget/views/widget-'+model.widget.widgetType+'.view.client.html'">
-
+<div class="container-fluid">
+    <div ng-switch="model.widget.widgetType">
+        <div ng-switch-when="HEADER">
+            <ng-include src="'widget/views/widget-header.view.client.html'"/>
         </div>
-    </form>
+        <div ng-switch-when="IMAGE">
+            <ng-include src="'widget/views/widget-image.view.client.html'"/>
+        </div>
+        <div ng-switch-when="YOUTUBE">
+            <ng-include src="'widget/views/widget-youtube.view.client.html'"/>
+        </div>
+    </div>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

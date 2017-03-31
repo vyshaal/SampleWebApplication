@@ -13,18 +13,23 @@
 
         init();
         function init() {
-            vm.websites = WebsiteService.findWebsitesByUser(vm.uid);
+            var promise = WebsiteService.findWebsitesByUser(vm.uid);
+            promise.then(function (response) {
+                vm.websites = response.data;
+            });
         }
 
         function createWebsite(userId,website) {
-            var w = WebsiteService.createWebsite(userId,website);
-            if(w){
-                $location.url('/user/'+userId+'/website');
-                vm.success = "Website created successfully!!!";
-            }
-            else{
-                vm.error = "Failed to create the website";
-            }
+            var promise = WebsiteService.createWebsite(userId,website);
+            promise.then(function(response) {
+                var w = response.data;
+                if(w._id){
+                    $location.url('/user/'+userId+'/website');
+                    vm.success = "Website created successfully!!!";
+                }else{
+                    vm.error = "Failed to create the website";
+                }
+            });
         }
     }
 })();

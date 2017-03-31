@@ -2,21 +2,35 @@
 <div class="container-fluid">
 
     <label for="name">Name</label>
-    <input type="text" class="form-control" value="name" id="name">
+    <input ng-model="model.widget.name" type="text" class="form-control" placeholder="name" id="name">
 
     <label for="text">Text</label>
-    <input type="text" class="form-control" value="text" id="text">
+    <input ng-model="model.widget.text" type="text" class="form-control" placeholder="text" id="text">
 
     <label for="url">URL</label>
-    <input type="text" class="form-control" value="https://google/some/image.com" id="url">
+    <input ng-model="model.widget.url" type="text" class="form-control" placeholder="https://google/some/image.com" id="url">
 
     <label for="width">Width</label>
-    <input type="text" class="form-control" value="100%" id="width">
+    <div class="input-group">
+    <input ng-model="model.widget.width" type="text" class="form-control" placeholder="100" id="width">
+        <div class="input-group-addon">%</div>
+    </div>
 
-    <label for="upload">Upload</label>
-    <input type="file" class="form-control" id="upload">
+    <!--<input ng-model="model.widget.url" type="file" class="form-control" id="upload">-->
 
-    <a class="btn btn-primary btn-block" href="widget-list.view.client.html">Upload Image</a>
+    <!--<a class="btn btn-primary btn-block" href="widget-list.view.client.html">Upload Image</a>-->
+    <label>Upload</label>
+    <form action="/api/uploads" method="post" enctype="multipart/form-data">
+        <input  name="myFile"    type="file" class="form-control"/>
+        <input  name="width"     value="{{model.widget.width}}" style="display: none"/>
+        <input  name="userId"    value="{{model.uid}}"   style="display: none"/>
+        <input  name="websiteId" value="{{model.wid}}"   style="display: none"/>
+        <input  name="pageId"    value="{{model.pid}}"   style="display: none"/>
+        <input  name="widgetId"  value="{{model.wgid}}"   style="display: none"/>
+        <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
+    </form>
+
+    <a class="btn btn-info btn-block" href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/{{model.wgid}}/flickr">Search</a>
     <a class="btn btn-danger btn-block" ng-click="model.deleteWidget(model.wgid)">Delete</a>
 
 </div>

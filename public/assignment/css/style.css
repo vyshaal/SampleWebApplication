@@ -6,6 +6,10 @@ textarea.form-control{
     margin-bottom: 3px;
 }
 
+form{
+    margin-bottom: 4px;
+}
+
 body{
     padding-top: 60px;
     padding-bottom: 80px;

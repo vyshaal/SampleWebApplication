@@ -11,7 +11,10 @@
     <input ng-model="model.widget.url" type="text" class="form-control" placeholder="https://google/some/video.com" id="url">
 
     <label for="width">Width</label>
-    <input ng-model="model.widget.width" type="text" class="form-control" placeholder="100%" id="width">
+    <div class="input-group">
+        <input ng-model="model.widget.width" type="text" class="form-control" placeholder="100" id="width">
+        <div class="input-group-addon">%</div>
+    </div>
 
     <a class="btn btn-danger btn-block" ng-click="model.deleteWidget(model.wgid)">Delete</a>
 

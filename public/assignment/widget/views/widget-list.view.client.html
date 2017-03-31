@@ -34,11 +34,11 @@
         </div>
 
         <div ng-switch-when="IMAGE">
-            <img ng-src="{{widget.url}}" width="{{widget.width}}"/>
+            <img ng-src="{{widget.url}}" width="{{widget.width+'%'}}"/>
         </div>
 
         <div ng-switch-when="YOUTUBE">
-            <iframe width="{{widget.width}}" ng-src="{{model.checkSafeYoutubeUrl(widget.url)}}"></iframe>
+            <iframe width="{{widget.width+'%'}}" ng-src="{{model.checkSafeYoutubeUrl(widget.url)}}"></iframe>
         </div>
 
         <div ng-switch-when="HTML" ng-bind-html="model.checkSafeHtml(widget.text)"></div>
@@ -48,7 +48,15 @@
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
-        <div class="navbar-footer">
+        <div class="navbar-footer pull-left">
+            <a class="navbar-brand" href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget">
+                <span class="glyphicon glyphicon-triangle-right nvw-glyphicon"> </span>
+            </a>
+            <a class="navbar-brand" href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget">
+            <span class="glyphicon glyphicon-eye-open nvw-glyphicon"> </span>
+            </a>
+        </div>
+        <div class="navbar-footer pull-right">
             <p class="nav navbar-text pull-right">
                 <a href="#/user/{{model.uid}}"><span class="glyphicon glyphicon-user"></span></a>
             </p>

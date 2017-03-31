@@ -15,15 +15,18 @@
 
         init();
         function init() {
-
         }
 
         function createWidget(widgetType) {
             var widget = {};
             widget.widgetType = widgetType;
-            var w = WidgetService.createWidget(vm.pid,widget);
-            console.log(w);
-            $location.url('/user/'+vm.uid+'/website/'+vm.wid+'/page/'+vm.pid+'/widget/'+w._id);
+            WidgetService.createWidget(vm.pid,widget)
+                .then(function (response) {
+                    var w = response.data;
+                    var url = '/user/'+vm.uid+'/website/'+vm.wid+'/page/'+vm.pid+'/widget/'+w._id;
+                    console.log(url);
+                    $location.url(url);
+                });
         }
     }
 })();

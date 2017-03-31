@@ -5,15 +5,15 @@
                 Profile
             </a>
             <p class="nav navbar-text pull-right">
-                <a href="#/user/{{model.user._id}}"><span class="glyphicon glyphicon-ok"></span></a>
+                <a ng-click="model.updateProfile(model.user)"><span class="glyphicon glyphicon-ok"></span></a>
             </p>
         </div>
     </div>
 </nav>
-<div ng-show="model.error" class="alert alert-danger" role="alert">
+<div ng-if="model.error" class="alert alert-danger" role="alert">
     {{model.error}}
 </div>
-<div ng-show="model.success" class="alert alert-success" role="alert">
+<div ng-if="model.success" class="alert alert-success" role="alert">
     {{model.success}}
 </div>
 <div class="container-fluid">

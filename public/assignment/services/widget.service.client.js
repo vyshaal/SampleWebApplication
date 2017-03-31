@@ -6,19 +6,7 @@
     angular.module("WebAppMaker")
         .factory("WidgetService",WidgetService);
 
-    function WidgetService() {
-        var count = 1000;
-        var widgets = [
-            { "_id": "123", "widgetType": "HEADER", "pageId": "321", "size": 2, "text": "GIZMODO"},
-            { "_id": "234", "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
-            { "_id": "345", "widgetType": "IMAGE", "pageId": "321", "width": "100%",
-                "url": "http://lorempixel.com/400/200/"},
-            { "_id": "456", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"},
-            { "_id": "567", "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
-            { "_id": "678", "widgetType": "YOUTUBE", "pageId": "321", "width": "100%",
-                "url": "https://youtu.be/AM2Ivdi9c4E" },
-            { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
-        ];
+    function WidgetService($http) {
 
         var api = {
             createWidget: createWidget,
@@ -31,47 +19,28 @@
         return api;
 
         function createWidget(pageId,widget){
-            widget._id = count++;
-            widget.pageId = pageId;
-            widgets.push(widget);
-            console.log(widget._id);
-            return widget;
+            var url = "/api/page/"+pageId+"/widget";
+            return $http.post(url,widget);
         }
 
         function findWidgetsByPageId(pageId) {
-            var result = [];
-            for(var wg in widgets){
-                if(widgets[wg].pageId==pageId)
-                    result.push(widgets[wg]);
-            }
-            return result;
+            var url = "/api/page/"+pageId+"/widget";
+            return $http.get(url);
         }
-        
+
         function findWidgetById(widgetId) {
-            for(var wg in widgets){
-                if(widgets[wg]._id==widgetId)
-                    return widgets[wg];
-            }
-            return null;
+            var url = "/api/widget/"+widgetId;
+            return $http.get(url);
         }
 
         function updateWidget(widgetId,widget) {
-            for(var wg in widgets){
-                if(widgets[wg]._id==widgetId){
-                    widgets[wg] = widget;
-                    return widgets;
-                }
-            }
-            return null;
+            var url = "/api/widget/"+widgetId;
+            return $http.put(url,widget);
         }
+
         function deleteWidget(widgetId){
-            for(var wg in widgets){
-                if(widgets[wg]._id==widgetId){
-                    widgets.splice(wg,1);
-                    return true;
-                }
-            }
-            return false;
+            var url = "/api/widget/"+widgetId;
+            return $http.delete(url);
         }
     }
 })();

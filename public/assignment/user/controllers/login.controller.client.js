@@ -20,11 +20,15 @@
                 vm.error = "Please enter valid password";
                 return
             }
-            var u = UserService.findUserByCredentials(user.username,user.password);
-            if(u==null)
-                vm.error = "User with the given credentials doesn't exist";
-            else
-                $location.url("/user/"+u._id);
+            var promise = UserService.findUserByCredentials(user.username,user.password);
+            promise.then(function (response) {
+                var u = response.data;
+                if(u._id)
+                    $location.url("/user/"+u._id);
+                else
+                    vm.error = "User with the given credentials doesn't exist";
+            });
+
         };
     }
 })();

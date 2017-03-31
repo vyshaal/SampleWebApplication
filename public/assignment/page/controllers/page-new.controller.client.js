@@ -14,7 +14,10 @@
 
         init();
         function init() {
-            vm.pages = PageService.findPageByWebsiteId(vm.wid);
+            PageService.findPageByWebsiteId(vm.wid)
+                .then(function (response) {
+                    vm.pages = response.data;
+                });
         }
 
         function createPage(websiteId,page) {
@@ -22,14 +25,14 @@
                 vm.error = "Page can't be created with empty details";
                 return
             }
-            var p = PageService.createPage(websiteId,page);
-            if(p){
-                vm.success = "Website created successfully!!!";
-                $location.url('/user/'+vm.uid+'/website/'+vm.wid+'/page');
-            }
-            else{
-                vm.error = "Failed to create the page";
-            }
+            PageService.createPage(websiteId,page)
+                .then(function (response) {
+                    vm.success = "Website created successfully!!!";
+                    $location.url('/user/'+vm.uid+'/website/'+vm.wid+'/page');
+                },
+                function (response) {
+                    vm.error = "Failed to create the page";
+                });
         }
     }
 })();
